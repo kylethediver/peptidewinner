@@ -2,70 +2,57 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0A0A0A', color: 'white', padding: 'clamp(48px,6vw,72px) 20px 32px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 40, marginBottom: 48 }}>
+    <footer style={{ background:'#050709', borderTop:'1px solid rgba(255,255,255,0.07)', padding:'60px 24px 40px' }}>
+      <div style={{ maxWidth:1100, margin:'0 auto' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:40, marginBottom:56 }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginBottom: 14 }}>
-              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700 }}>Peptide</span>
-              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: '#10B981' }}>Winner</span>
+            <div style={{ fontFamily:"'Playfair Display',serif", fontSize:22, fontWeight:800, color:'white', letterSpacing:'-0.03em', marginBottom:10 }}>
+              Peptide<span style={{ color:'#10B981' }}>Winner</span>
             </div>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 13, color: '#6B7280', lineHeight: 1.6, maxWidth: 220 }}>
-              The #1 trusted comparison guide for peptide therapy providers.
-            </p>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 11, color: '#4B5563', marginTop: 10 }}>
-              *Affiliate commissions do not affect rankings.
+            <p style={{ fontFamily:"'Sora',sans-serif", fontSize:13, color:'rgba(255,255,255,0.35)', lineHeight:1.7 }}>
+              Compare licensed telehealth peptide providers. Unbiased reviews, transparent pricing.
             </p>
           </div>
-
-          {[
-            {
-              title: 'Providers',
-              links: [
-                { label: 'Compare All', href: '/providers' },
-                { label: 'Best for Recovery', href: '/providers' },
-                { label: 'Best for Weight Loss', href: '/providers' },
-                { label: 'Best Value', href: '/providers' },
-                { label: 'List Your Practice', href: '/contact' },
-              ]
-            },
-            {
-              title: 'Peptides',
-              links: [
-                { label: 'BPC-157', href: '/insights' },
-                { label: 'Sermorelin', href: '/insights' },
-                { label: 'TB-500', href: '/insights' },
-                { label: 'Semaglutide', href: '/insights' },
-                { label: 'NAD+', href: '/insights' },
-              ]
-            },
-            {
-              title: 'Company',
-              links: [
-                { label: 'About', href: '/about' },
-                { label: 'Reviews', href: '/reviews' },
-                { label: 'FAQ', href: '/faq' },
-                { label: 'Contact', href: '/contact' },
-                { label: 'Privacy Policy', href: '/privacy' },
-                { label: 'Terms', href: '/terms' },
-              ]
-            }
-          ].map(col => (
-            <div key={col.title}>
-              <h4 style={{ fontFamily: "'Sora', sans-serif", fontSize: 11, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>{col.title}</h4>
-              {col.links.map(l => (
-                <Link key={l.label} href={l.href} style={{ display: 'block', fontFamily: "'Sora', sans-serif", fontSize: 13, color: '#6B7280', textDecoration: 'none', marginBottom: 9 }}>{l.label}</Link>
-              ))}
-            </div>
-          ))}
+          <div>
+            <div style={{ fontFamily:"'Sora',sans-serif", fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.3)', textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:16 }}>Providers</div>
+            {[
+              { href:'/providers', label:'Telehealth Providers' },
+              { href:'/pharmacies', label:'Compounding Pharmacies' },
+              { href:'/start', label:'Find My Provider' },
+            ].map(l => <Link key={l.href} href={l.href} style={{ display:'block', fontFamily:"'Sora',sans-serif", fontSize:13, color:'rgba(255,255,255,0.45)', textDecoration:'none', marginBottom:10 }}>{l.label}</Link>)}
+          </div>
+          <div>
+            <div style={{ fontFamily:"'Sora',sans-serif", fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.3)', textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:16 }}>Peptides</div>
+            {[
+              { href:'/peptides/bpc-157', label:'BPC-157' },
+              { href:'/peptides/sermorelin', label:'Sermorelin' },
+              { href:'/peptides/ipamorelin', label:'Ipamorelin' },
+              { href:'/peptides/nad-plus', label:'NAD+' },
+              { href:'/peptides/semaglutide', label:'Semaglutide' },
+              { href:'/peptides/pt-141', label:'PT-141' },
+            ].map(l => <Link key={l.href} href={l.href} style={{ display:'block', fontFamily:"'Sora',sans-serif", fontSize:13, color:'rgba(255,255,255,0.45)', textDecoration:'none', marginBottom:10 }}>{l.label}</Link>)}
+          </div>
+          <div>
+            <div style={{ fontFamily:"'Sora',sans-serif", fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.3)', textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:16 }}>Resources</div>
+            {[
+              { href:'/insights', label:'Insights' },
+              { href:'/reviews', label:'Reviews' },
+              { href:'/faq', label:'FAQ' },
+              { href:'/about', label:'About' },
+              { href:'/contact', label:'Contact' },
+            ].map(l => <Link key={l.href} href={l.href} style={{ display:'block', fontFamily:"'Sora',sans-serif", fontSize:13, color:'rgba(255,255,255,0.45)', textDecoration:'none', marginBottom:10 }}>{l.label}</Link>)}
+          </div>
         </div>
-
-        <div style={{ borderTop: '1px solid #1F2937', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 12, color: '#4B5563' }}>© 2026 PeptideWinner.com</p>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 11, color: '#374151', maxWidth: 560, lineHeight: 1.5 }}>
-            PeptideWinner is for informational purposes only and does not provide medical advice. Always consult a licensed physician before starting any peptide therapy.
-          </p>
+        <div style={{ borderTop:'1px solid rgba(255,255,255,0.06)', paddingTop:28, display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:16 }}>
+          <p style={{ fontFamily:"'Sora',sans-serif", fontSize:12, color:'rgba(255,255,255,0.2)' }}>© 2026 PeptideWinner. Affiliate disclosure: we earn commissions when you use our links.</p>
+          <div style={{ display:'flex', gap:20 }}>
+            <Link href="/privacy" style={{ fontFamily:"'Sora',sans-serif", fontSize:12, color:'rgba(255,255,255,0.25)', textDecoration:'none' }}>Privacy</Link>
+            <Link href="/terms" style={{ fontFamily:"'Sora',sans-serif", fontSize:12, color:'rgba(255,255,255,0.25)', textDecoration:'none' }}>Terms</Link>
+          </div>
         </div>
+        <p style={{ fontFamily:"'Sora',sans-serif", fontSize:11, color:'rgba(255,255,255,0.15)', lineHeight:1.7, marginTop:20, maxWidth:800 }}>
+          Medical Disclaimer: The content on PeptideWinner is for informational purposes only and does not constitute medical advice. Always consult a licensed physician before beginning any peptide therapy protocol. Compounded medications are not FDA-approved finished products.
+        </p>
       </div>
     </footer>
   )

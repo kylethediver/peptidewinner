@@ -1,79 +1,125 @@
+import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import { articles } from '@/lib/data'
-import Link from 'next/link'
-
-export async function generateStaticParams() {
-  return articles.map(a => ({ slug: a.slug }))
-}
+import { articles, providers, peptides } from '@/lib/data'
+import { notFound } from 'next/navigation'
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const article = articles.find(a => a.slug === slug) || articles[0]
+  const article = articles.find(a => a.slug === slug)
+  if (!article) notFound()
+
+  const related = articles.filter(a => a.slug !== slug && a.peptideTags.some(t => article.peptideTags.includes(t))).slice(0, 3)
+
+  // Providers related to peptide tags in this article
+  const relatedProviders = providers.filter(p =>
+    article.peptideTags.some(tag => p.peptides.some(pp => pp.toLowerCase().includes(tag.toLowerCase())))
+  ).slice(0, 3)
+
+  function Stars({ rating }: { rating: number }) {
+    return (
+      <span style={{ fontSize: 12, letterSpacing: '-1px' }}>
+        {[1,2,3,4,5].map(s => (
+          <span key={s} style={{ color: s <= Math.floor(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
+        ))}
+      </span>
+    )
+  }
+
   return (
     <>
       <Nav />
-      <main>
-        <section style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0', padding: '64px 24px 48px' }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#6B7280', marginBottom: 16 }}>
-              <Link href="/insights" style={{ color: '#6B7280', textDecoration: 'none' }}>Insights</Link> / {article.category}
-            </p>
-            <span style={{ background: '#F0F9FF', color: '#0369A1', fontSize: 11, fontWeight: 700, padding: '4px 12px', borderRadius: 100, fontFamily: "'Inter', sans-serif" }}>{article.category}</span>
-            <h1 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(28px, 4vw, 46px)', color: '#0F172A', margin: '16px 0', lineHeight: 1.2, maxWidth: 800 }}>{article.title}</h1>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 19, color: '#6B7280', maxWidth: 700, lineHeight: 1.6, marginBottom: 20 }}>{article.excerpt}</p>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#9CA3AF' }}>{article.author} · {article.date} · {article.readTime}</p>
+      <main style={{ background:'#080C10', minHeight:'100vh' }}>
+        {/* Hero */}
+        <section style={{ padding:'clamp(48px,7vw,80px) 24px 0', background:'linear-gradient(160deg,#0D1B2A 0%,#080C10 100%)' }}>
+          <div style={{ maxWidth:780, margin:'0 auto' }}>
+            <Link href="/insights" style={{ fontFamily:"'Sora',sans-serif", fontSize:13, color:'rgba(255,255,255,0.4)', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:6, marginBottom:28 }}>← All articles</Link>
+            <div style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:20 }}>
+              <span style={{ fontFamily:"'Sora',sans-serif", fontSize:10, fontWeight:700, color:'#10B981', textTransform:'uppercase', letterSpacing:'0.1em', background:'rgba(16,185,129,0.1)', padding:'3px 12px', borderRadius:100 }}>{article.category}</span>
+              {article.peptideTags.map(t => (
+                <Link key={t} href={`/peptides/${peptides.find(p=>p.name===t)?.slug || t.toLowerCase()}`} style={{ textDecoration:'none', fontFamily:"'Sora',sans-serif", fontSize:10, fontWeight:600, color:'rgba(255,255,255,0.5)', background:'rgba(255,255,255,0.06)', padding:'3px 12px', borderRadius:100 }}>{t}</Link>
+              ))}
+            </div>
+            <h1 style={{ fontFamily:"'Playfair Display',serif", fontSize:'clamp(28px,4.5vw,52px)', color:'white', fontWeight:800, letterSpacing:'-0.03em', lineHeight:1.1, marginBottom:20 }}>{article.title}</h1>
+            <p style={{ fontFamily:"'Sora',sans-serif", fontSize:17, color:'rgba(255,255,255,0.45)', lineHeight:1.7, marginBottom:28 }}>{article.excerpt}</p>
+            <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:40, paddingBottom:40, borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
+              <div style={{ width:40, height:40, borderRadius:10, background:'rgba(16,185,129,0.12)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:12, fontWeight:700, color:'#10B981', fontFamily:"'Sora',sans-serif", flexShrink:0 }}>
+                {article.author.split(' ').map(n=>n[0]).join('')}
+              </div>
+              <div>
+                <div style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:14, color:'white' }}>{article.author}</div>
+                <div style={{ fontFamily:"'Sora',sans-serif", fontSize:12, color:'rgba(255,255,255,0.35)' }}>{article.authorTitle} · {article.readTime} · {article.date}</div>
+              </div>
+            </div>
+          </div>
+          <div style={{ maxWidth:780, margin:'0 auto', paddingBottom:0 }}>
+            <img src={article.image} alt={article.title} style={{ width:'100%', borderRadius:'16px 16px 0 0', display:'block', maxHeight:420, objectFit:'cover', filter:'brightness(0.85)' }} />
           </div>
         </section>
 
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <img src={article.image} alt={article.title} style={{ width: '100%', height: 400, objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
-        </div>
+        {/* Article body */}
+        <section style={{ padding:'clamp(40px,5vw,64px) 24px' }}>
+          <div style={{ maxWidth:780, margin:'0 auto' }}>
+            {article.body.split('\n\n').map((para, i) => (
+              <p key={i} style={{ fontFamily:"'Sora',sans-serif", fontSize:16, color:'rgba(255,255,255,0.65)', lineHeight:1.85, marginBottom:24 }}>{para}</p>
+            ))}
 
-        <section style={{ padding: '48px 24px 96px' }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 300px', gap: 64, alignItems: 'start' }}>
-            <div style={{ maxWidth: 740 }}>
-              <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 28, color: '#0F172A', marginBottom: 16 }}>Overview</h2>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>
-                If you have been exploring peptide therapy, you have probably come across this topic. This guide cuts through the noise with what peer-reviewed research actually says, what you can realistically expect, and how to find a legitimate provider.
-              </p>
-              <div style={{ background: '#F0F9FF', border: '1px solid #BAE6FD', borderRadius: 12, padding: '20px 24px', marginBottom: 32 }}>
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 15, color: '#0369A1', marginBottom: 8 }}>📋 Key Takeaways</p>
-                <ul style={{ paddingLeft: 20 }}>
-                  {['Evidence supports use for the stated goals when properly dosed', 'Must be obtained through a licensed physician and compounding pharmacy', 'Results typically appear within 4-12 weeks', 'Verify your pharmacy is FDA-registered before starting'].map(p => (
-                    <li key={p} style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#374151', marginBottom: 6 }}>{p}</li>
-                  ))}
-                </ul>
-              </div>
-              <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 28, color: '#0F172A', marginBottom: 16 }}>How It Works</h2>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>
-                The mechanism of action is well-established in preclinical studies. At the cellular level, the peptide binds to specific receptors and initiates a cascade of downstream effects that support the therapeutic goals. Clinical evidence in humans generally supports these findings at appropriate doses.
-              </p>
-              <div style={{ background: '#FEF3C7', border: '1px solid #FDE68A', borderRadius: 12, padding: '20px 24px', marginBottom: 32 }}>
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 14, color: '#92400E', marginBottom: 8 }}>⚠️ Medical Disclaimer</p>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#78350F' }}>This article is for informational purposes only and does not constitute medical advice. Always consult a licensed physician before starting any peptide therapy protocol.</p>
-              </div>
-              <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 28, color: '#0F172A', marginBottom: 16 }}>Finding a Legitimate Provider</h2>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: '#374151', lineHeight: 1.8 }}>
-                The most important step is finding a provider who can demonstrate licensed physician oversight and an FDA-registered compounding pharmacy partnership. PeptideWinner has done this verification for you.
-              </p>
-            </div>
-
-            <div style={{ position: 'sticky', top: 88 }}>
-              <div style={{ background: 'white', border: '1px solid #E2E8F0', borderRadius: 16, padding: 24, marginBottom: 24 }}>
-                <h3 style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 16, color: '#0F172A', marginBottom: 12 }}>Find a provider for this peptide</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#6B7280', lineHeight: 1.5, marginBottom: 20 }}>Take our 2-minute quiz and get matched to verified providers.</p>
-                <Link href="/start" className="btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: 14, display: 'flex' }}>Take the Quiz →</Link>
-              </div>
-              <div style={{ background: '#0F3460', borderRadius: 16, padding: 24 }}>
-                <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 20, color: 'white', marginBottom: 8 }}>Stay ahead of peptide research.</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#94A3B8', marginBottom: 16, lineHeight: 1.5 }}>Weekly updates on new studies and providers.</p>
-                <input type="email" placeholder="Your email" style={{ width: '100%', height: 40, borderRadius: 8, border: 'none', padding: '0 12px', fontFamily: "'Inter', sans-serif", fontSize: 13, marginBottom: 10, outline: 'none', display: 'block' }} />
-                <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: 13, display: 'flex' }}>Subscribe Free</button>
+            {/* Peptide links */}
+            <div style={{ marginTop:48, padding:'28px', background:'rgba(16,185,129,0.06)', borderRadius:18, border:'1px solid rgba(16,185,129,0.15)' }}>
+              <p style={{ fontFamily:"'Sora',sans-serif", fontSize:13, fontWeight:700, color:'#10B981', marginBottom:14 }}>Peptides mentioned in this article:</p>
+              <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
+                {article.peptideTags.map(tag => {
+                  const peptide = peptides.find(p => p.name === tag)
+                  return (
+                    <Link key={tag} href={`/peptides/${peptide?.slug || tag.toLowerCase()}`} style={{ background:'rgba(16,185,129,0.12)', color:'#10B981', fontFamily:"'Sora',sans-serif", fontSize:13, fontWeight:600, padding:'8px 16px', borderRadius:100, textDecoration:'none' }}>
+                      {tag} →
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </div>
         </section>
+
+        {/* Related providers */}
+        {relatedProviders.length > 0 && (
+          <section style={{ padding:'clamp(32px,4vw,56px) 24px', background:'#0D1117', borderTop:'1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ maxWidth:780, margin:'0 auto' }}>
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:13, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:20 }}>Providers offering these peptides</h3>
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))', gap:12 }}>
+                {relatedProviders.map(p => (
+                  <div key={p.slug} style={{ background:'rgba(255,255,255,0.03)', borderRadius:14, padding:'18px', border:'1px solid rgba(255,255,255,0.06)' }}>
+                    <div style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:14, color:'white', marginBottom:4 }}>{p.name}</div>
+                    <Stars rating={p.rating} />
+                    <div style={{ fontFamily:"'Sora',sans-serif", fontSize:12, color:'rgba(255,255,255,0.35)', marginTop:6, marginBottom:12 }}>${p.priceFrom}/mo · {p.location}</div>
+                    <Link href={`/providers/${p.slug}`} style={{ background:'#10B981', color:'white', fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:12, padding:'8px 14px', borderRadius:100, textDecoration:'none' }}>View deal</Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Related articles */}
+        {related.length > 0 && (
+          <section style={{ padding:'clamp(32px,4vw,56px) 24px', background:'#080C10', borderTop:'1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ maxWidth:780, margin:'0 auto' }}>
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:13, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:20 }}>Related articles</h3>
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))', gap:12 }}>
+                {related.map(a => (
+                  <Link key={a.slug} href={`/insights/${a.slug}`} style={{ textDecoration:'none' }}>
+                    <div style={{ borderRadius:14, overflow:'hidden', border:'1px solid rgba(255,255,255,0.06)', background:'rgba(255,255,255,0.02)' }}>
+                      <img src={a.image} alt={a.title} style={{ width:'100%', height:120, objectFit:'cover', filter:'brightness(0.8)' }} />
+                      <div style={{ padding:'14px' }}>
+                        <h4 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:13, color:'white', lineHeight:1.4 }}>{a.title}</h4>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </>

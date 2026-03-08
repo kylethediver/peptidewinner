@@ -2,14 +2,15 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'PeptideWinner — Find Trusted Peptide Therapy Providers',
-  description: 'Compare licensed telehealth providers for peptide therapy. Read real patient reviews, verify pharmacy sourcing, and find the best peptide provider for your goals.',
+  title: 'PeptideWinner — Compare Peptide Therapy Providers',
+  description: 'Find and compare licensed telehealth peptide therapy providers. Verified reviews, transparent pricing, and pharmacy sourcing.',
+  keywords: 'peptide therapy, BPC-157, sermorelin, ipamorelin, NAD+, telehealth, compounding pharmacy',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ background: '#080C10' }}>{children}</body>
     </html>
   )
 }
