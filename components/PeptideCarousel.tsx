@@ -96,7 +96,7 @@ const PEPTIDE_CARDS = [
   },
 ]
 
-const PLACEHOLDER_IMG = '/placeholder-vial.jpeg'
+const PLACEHOLDER_IMG = '/placeholder-vial.png'
 
 export default function PeptideCarousel() {
   const [activeIndex, setActiveIndex] = useState(0)
