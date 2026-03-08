@@ -67,7 +67,7 @@ export default function ProvidersPage() {
                     </div>
                     <div style={{ display:'flex', gap:8 }}>
                       <Link href={`/providers/${p.slug}`} style={{ background:'var(--pw-surface)', color:'var(--pw-midnight)', fontFamily:'var(--font-body)', fontWeight:500, fontSize:13, padding:'10px 18px', borderRadius:100, textDecoration:'none', border:'1.5px solid rgba(20,24,38,0.12)' }}>Details</Link>
-                      <Link href={p.affiliateUrl || `/providers/${p.slug}`} style={{ background:'var(--pw-midnight)', color:'white', fontFamily:'var(--font-body)', fontWeight:500, fontSize:13, padding:'10px 18px', borderRadius:100, textDecoration:'none', boxShadow:'0 4px 14px rgba(14,17,32,0.18)' }}>View deal</Link>
+                      <Link href={(p as any).affiliateUrl || `/providers/${p.slug}`} style={{ background:'var(--pw-midnight)', color:'white', fontFamily:'var(--font-body)', fontWeight:500, fontSize:13, padding:'10px 18px', borderRadius:100, textDecoration:'none', boxShadow:'0 4px 14px rgba(14,17,32,0.18)' }}>View deal</Link>
                     </div>
                   </div>
                 </div>
