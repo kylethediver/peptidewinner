@@ -13,8 +13,8 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export default async function ProviderDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-     const { slug } = await params
-     const provider = providers.find(p => p.slug === slug)
+  const { slug } = await params
+  const provider = providers.find(p => p.slug === slug)
   if (!provider) notFound()
 
   const providerReviews = reviews.slice(0, 4)

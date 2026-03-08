@@ -8,7 +8,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-     const { slug } = await params
+  const { slug } = await params
   const article = articles.find(a => a.slug === slug) || articles[0]
   return (
     <>
