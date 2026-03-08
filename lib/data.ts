@@ -142,7 +142,9 @@ export const peptides = [
     sideEffects: `Topical: among the safest skincare ingredients known with decades of consumer use. Injectable: standard injection site reactions (mild redness, swelling). Blue-green discoloration reported in older literature is associated with concentrations far above therapeutic doses and is not seen at standard dosing.`,
     priceRange: '$79–$199/mo',
     peptideIds: ['ghk-cu'],
-  },slug: 'semaglutide',
+  },
+  {
+    slug: 'semaglutide',
     name: 'Semaglutide',
     subtitle: 'GLP-1 Receptor Agonist',
     category: 'Weight Loss',
