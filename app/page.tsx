@@ -309,7 +309,7 @@ export default function HomePage() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
                     <div>
-                      <div style={{ fontFamily: "'Sora', sans-serif", fontSize: 13, fontWeight: 700, color: '#0A0A0A' }}>{p.price}</div>
+                      <div style={{ fontFamily: "'Sora', sans-serif", fontSize: 13, fontWeight: 700, color: '#0A0A0A' }}>${p.priceFrom}/mo</div>
                       <div style={{ fontFamily: "'Sora', sans-serif", fontSize: 11, color: '#9CA3AF' }}>per month</div>
                     </div>
                     {p.badge && (
