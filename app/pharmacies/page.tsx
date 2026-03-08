@@ -35,7 +35,7 @@ export default function PharmaciesPage() {
                       <div style={{ fontFamily:'var(--font-display)', fontWeight:600, fontSize:17, color:'var(--pw-midnight)', letterSpacing:'-0.01em' }}>{ph.name}</div>
                       <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'var(--pw-ink-60)', letterSpacing:'0.06em', textTransform:'uppercase', marginTop:3 }}>{ph.location}</div>
                     </div>
-                    {ph.pcab && <span style={{ marginLeft:'auto', background:'var(--pw-mint)', color:'#1A5C3A', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, padding:'3px 10px', borderRadius:100, letterSpacing:'0.08em', textTransform:'uppercase', whiteSpace:'nowrap' }}>PCAB ✓</span>}
+                    {(ph as any).pcab && <span style={{ marginLeft:'auto', background:'var(--pw-mint)', color:'#1A5C3A', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, padding:'3px 10px', borderRadius:100, letterSpacing:'0.08em', textTransform:'uppercase', whiteSpace:'nowrap' }}>PCAB ✓</span>}
                   </div>
                   <p style={{ fontFamily:'var(--font-body)', fontSize:14, fontWeight:300, color:'var(--pw-ink-60)', lineHeight:1.7, marginBottom:14 }}>{ph.description}</p>
                   <div style={{ display:'flex', flexWrap:'wrap', gap:5 }}>
