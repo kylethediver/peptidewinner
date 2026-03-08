@@ -12,8 +12,9 @@ function Stars({ rating }: { rating: number }) {
   return <span>{[1,2,3,4,5].map(s => <span key={s} style={{ color: '#F59E0B', fontSize: 14 }}>{s <= Math.floor(rating) ? '★' : '☆'}</span>)}</span>
 }
 
-export default function ProviderDetailPage({ params }: { params: { slug: string } }) {
-  const provider = providers.find(p => p.slug === params.slug)
+export default async function ProviderDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+     const { slug } = await params
+     const provider = providers.find(p => p.slug === slug)
   if (!provider) notFound()
 
   const providerReviews = reviews.slice(0, 4)
