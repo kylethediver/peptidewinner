@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import { providers, reviews, articles, peptides } from '@/lib/data'
+import PeptideCarousel from '@/components/PeptideCarousel'
+import { providers, reviews, articles } from '@/lib/data'
 
 function Stars({ rating, size = 14 }: { rating: number; size?: number }) {
   return (
@@ -13,18 +14,6 @@ function Stars({ rating, size = 14 }: { rating: number; size?: number }) {
   )
 }
 
-// Category → pastel color map
-const categoryColors: Record<string,string> = {
-  'Recovery & Healing':   '#C8DEFA',
-  'Anti-Aging & Hormones':'#DDD5F5',
-  'Anti-Aging & Skin':    '#F5D8E8',
-  'Longevity & Energy':   '#F2F0C8',
-  'Sexual Health':        '#F5D8E8',
-  'Weight Loss':          '#C9EDDF',
-  'Weight & Metabolic':   '#C9EDDF',
-  'Immune & Longevity':   '#C9EDDF',
-  'Performance & Recovery':'#C8DEFA',
-}
 
 const pressLogos = [
   { name: 'WIRED',              font: '"Arial Black", sans-serif', weight: 900, size: 18, spacing: '-0.04em', style: 'normal' },
@@ -192,36 +181,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── PEPTIDE CATEGORY GRID ── */}
-        <section style={{ padding: 'clamp(64px,7vw,96px) 32px', background: 'var(--pw-white)' }}>
-          <div style={{ maxWidth: 1160, margin: '0 auto' }}>
-            <div style={{ marginBottom: 16, display:'inline-flex', alignItems:'center', gap:10 }}>
-              <span style={{ display:'block', width:32, height:1, background:'var(--pw-ink-30)' }} />
-              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'0.20em', textTransform:'uppercase', color:'var(--pw-ink-60)' }}>Peptide Library</span>
-            </div>
-            <h2 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(32px,4.5vw,52px)', fontWeight:600, color:'var(--pw-midnight)', letterSpacing:'-0.02em', lineHeight:1.1, marginBottom:16 }}>
-              Find doctor-trusted<br/>treatment options.
-            </h2>
-            <p style={{ fontFamily:'var(--font-body)', fontSize:16, fontWeight:300, color:'var(--pw-ink-60)', lineHeight:1.7, marginBottom:48, maxWidth:480 }}>
-              Every peptide in our library is covered by licensed telehealth providers with transparent pricing.
-            </p>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(190px, 1fr))', gap:12 }}>
-              {peptides.map(p => {
-                const bg = categoryColors[p.category] || '#F5F6FA'
-                return (
-                  <Link key={p.slug} href={`/peptides/${p.slug}`} style={{ textDecoration:'none' }}>
-                    <div style={{ background:bg, borderRadius:20, padding:'24px 20px 20px', transition:'transform 0.2s, box-shadow 0.2s', cursor:'pointer' }}>
-                      <div style={{ fontSize:28, marginBottom:14 }}>{p.emoji}</div>
-                      <div style={{ fontFamily:'var(--font-display)', fontWeight:600, fontSize:16, color:'var(--pw-midnight)', marginBottom:3, letterSpacing:'-0.01em' }}>{p.name}</div>
-                      <div style={{ fontFamily:'var(--font-body)', fontSize:12, color:'rgba(14,17,32,0.55)', marginBottom:12, lineHeight:1.4 }}>{p.subtitle}</div>
-                      <div style={{ fontFamily:'var(--font-mono)', fontSize:11, fontWeight:700, color:'var(--pw-midnight)', letterSpacing:'0.04em' }}>{p.priceRange}</div>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </section>
+        {/* ── PEPTIDE CAROUSEL ── */}
+        <PeptideCarousel />
 
         {/* ── WARNING TICKER ── */}
         <div style={{ background:'#FDE8E8', padding:'16px 0', overflow:'hidden', position:'relative', borderTop:'1px solid rgba(139,26,26,0.12)', borderBottom:'1px solid rgba(139,26,26,0.12)' }}>
