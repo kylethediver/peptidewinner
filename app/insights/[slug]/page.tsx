@@ -7,8 +7,9 @@ export async function generateStaticParams() {
   return articles.map(a => ({ slug: a.slug }))
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = articles.find(a => a.slug === params.slug) || articles[0]
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+     const { slug } = await params
+  const article = articles.find(a => a.slug === slug) || articles[0]
   return (
     <>
       <Nav />
