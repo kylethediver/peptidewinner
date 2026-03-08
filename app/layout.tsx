@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script async src="https://subscribe-forms.beehiiv.com/embed.js" />
+      </head>
       <body style={{ background: '#080C10' }}>{children}</body>
     </html>
   )
