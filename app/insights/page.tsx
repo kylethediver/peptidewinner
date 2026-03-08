@@ -1,51 +1,43 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import { articles, peptides } from '@/lib/data'
+import { articles } from '@/lib/data'
 
 export default function InsightsPage() {
-  const categories = Array.from(new Set(articles.flatMap(a => a.peptideTags)))
-
   return (
     <>
       <Nav />
-      <main style={{ background:'#080C10', minHeight:'100vh' }}>
-        <section style={{ padding:'clamp(56px,7vw,88px) 24px', background:'linear-gradient(160deg,#0D1B2A 0%,#080C10 100%)', borderBottom:'1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ maxWidth:1100, margin:'0 auto' }}>
-            <p style={{ fontFamily:"'Sora',sans-serif", fontSize:11, fontWeight:700, color:'#10B981', textTransform:'uppercase', letterSpacing:'0.14em', marginBottom:16 }}>Peptide Insights</p>
-            <h1 style={{ fontFamily:"'Playfair Display',serif", fontSize:'clamp(36px,5.5vw,68px)', color:'white', fontWeight:800, letterSpacing:'-0.03em', lineHeight:1.04, marginBottom:20 }}>
-              Evidence-based<br /><span style={{ color:'#10B981' }}>peptide research.</span>
-            </h1>
-            <p style={{ fontFamily:"'Sora',sans-serif", fontSize:17, color:'rgba(255,255,255,0.5)', maxWidth:560, lineHeight:1.7, marginBottom:36 }}>
-              In-depth guides, comparisons, and protocol breakdowns written by medical professionals. Categorized by peptide.
-            </p>
-            <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-              {peptides.map(p => (
-                <Link key={p.slug} href={`/peptides/${p.slug}`} style={{ background:'rgba(255,255,255,0.05)', color:'rgba(255,255,255,0.55)', fontFamily:"'Sora',sans-serif", fontSize:12, fontWeight:500, padding:'6px 14px', borderRadius:100, textDecoration:'none', border:'1px solid rgba(255,255,255,0.08)' }}>{p.name}</Link>
-              ))}
+      <main style={{ background:'var(--pw-white)', minHeight:'100vh' }}>
+        <section style={{ padding:'clamp(64px,7vw,96px) 32px', background:'var(--pw-midnight)', position:'relative', overflow:'hidden' }}>
+          <div style={{ position:'absolute', top:-100, right:-100, width:500, height:500, borderRadius:'50%', background:'var(--pw-butter)', filter:'blur(80px)', opacity:0.20, pointerEvents:'none' }} />
+          <div style={{ maxWidth:1160, margin:'0 auto', position:'relative', zIndex:1 }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:10, marginBottom:24 }}>
+              <span style={{ display:'block', width:32, height:1, background:'rgba(255,255,255,0.20)' }} />
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'0.20em', textTransform:'uppercase', color:'rgba(255,255,255,0.40)' }}>Peptide Insights</span>
             </div>
+            <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(40px,6vw,72px)', color:'white', fontWeight:700, letterSpacing:'-0.03em', lineHeight:0.95, marginBottom:20 }}>
+              Evidence-based<br/>
+              <span style={{ background:'linear-gradient(135deg,#F2F0C8,#C9EDDF)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>peptide research.</span>
+            </h1>
+            <p style={{ fontFamily:'var(--font-body)', fontSize:18, fontWeight:300, color:'rgba(255,255,255,0.50)', maxWidth:480, lineHeight:1.75 }}>
+              Clinical breakdowns, protocol comparisons, and provider analysis from our research team.
+            </p>
           </div>
         </section>
-
-        <section style={{ padding:'clamp(40px,5vw,72px) 24px' }}>
-          <div style={{ maxWidth:1100, margin:'0 auto' }}>
+        <section style={{ padding:'clamp(48px,5vw,72px) 32px' }}>
+          <div style={{ maxWidth:1160, margin:'0 auto' }}>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(320px, 1fr))', gap:20 }}>
               {articles.map(a => (
                 <Link key={a.slug} href={`/insights/${a.slug}`} style={{ textDecoration:'none' }}>
-                  <div style={{ borderRadius:20, overflow:'hidden', border:'1px solid rgba(255,255,255,0.07)', background:'rgba(255,255,255,0.02)', height:'100%' }}>
-                    <img src={a.image} alt={a.title} style={{ width:'100%', height:200, objectFit:'cover', display:'block', filter:'brightness(0.8)' }} />
-                    <div style={{ padding:'22px 24px' }}>
-                      <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginBottom:12 }}>
-                        <span style={{ fontFamily:"'Sora',sans-serif", fontSize:10, fontWeight:700, color:'#10B981', textTransform:'uppercase', letterSpacing:'0.1em', background:'rgba(16,185,129,0.1)', padding:'3px 10px', borderRadius:100 }}>{a.category}</span>
-                        {a.peptideTags.map(t => (
-                          <span key={t} style={{ fontFamily:"'Sora',sans-serif", fontSize:10, fontWeight:600, color:'rgba(255,255,255,0.4)', background:'rgba(255,255,255,0.05)', padding:'3px 10px', borderRadius:100 }}>{t}</span>
-                        ))}
-                      </div>
-                      <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:16, color:'white', marginBottom:10, lineHeight:1.45 }}>{a.title}</h2>
-                      <p style={{ fontFamily:"'Sora',sans-serif", fontSize:13, color:'rgba(255,255,255,0.4)', lineHeight:1.65, marginBottom:16 }}>{a.excerpt}</p>
-                      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-                        <div style={{ fontFamily:"'Sora',sans-serif", fontSize:12, color:'rgba(255,255,255,0.3)' }}>{a.readTime} · {a.date}</div>
-                        <div style={{ fontFamily:"'Sora',sans-serif", fontSize:12, fontWeight:600, color:'#10B981' }}>Read →</div>
+                  <div style={{ borderRadius:20, overflow:'hidden', background:'white', boxShadow:'0 2px 16px rgba(14,17,32,0.06)', border:'1px solid rgba(20,24,38,0.07)' }}>
+                    <img src={a.image} alt={a.title} style={{ width:'100%', height:200, objectFit:'cover', display:'block' }} />
+                    <div style={{ padding:'24px 26px' }}>
+                      <span style={{ fontFamily:'var(--font-mono)', fontSize:10, fontWeight:700, color:'var(--pw-ink-60)', textTransform:'uppercase', letterSpacing:'0.14em' }}>{a.category}</span>
+                      <h2 style={{ fontFamily:'var(--font-display)', fontWeight:600, fontSize:18, color:'var(--pw-midnight)', margin:'10px 0 8px', lineHeight:1.3, letterSpacing:'-0.01em' }}>{a.title}</h2>
+                      <p style={{ fontFamily:'var(--font-body)', fontSize:14, fontWeight:300, color:'var(--pw-ink-60)', lineHeight:1.65, marginBottom:16 }}>{a.excerpt}</p>
+                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                        <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--pw-ink-30)', letterSpacing:'0.06em' }}>{a.readTime} · {a.date}</span>
+                        <span style={{ fontFamily:'var(--font-body)', fontSize:13, fontWeight:500, color:'var(--pw-midnight)' }}>Read →</span>
                       </div>
                     </div>
                   </div>

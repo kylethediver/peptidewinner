@@ -1,44 +1,32 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
-export const metadata = { title: 'Contact PeptideWinner' }
-
 export default function ContactPage() {
   return (
     <>
       <Nav />
-      <main>
-        <section style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0', padding: '64px 24px 48px', textAlign: 'center' }}>
-          <div style={{ maxWidth: 600, margin: '0 auto' }}>
-            <h1 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 48, color: '#0F172A', marginBottom: 16 }}>Contact Us</h1>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: '#6B7280', lineHeight: 1.6 }}>Questions, partnerships, provider listings, or press inquiries — we reply within 24 hours.</p>
+      <main style={{ background:'var(--pw-white)', minHeight:'100vh' }}>
+        <section style={{ padding:'clamp(64px,7vw,96px) 32px', background:'var(--pw-midnight)', position:'relative', overflow:'hidden' }}>
+          <div style={{ position:'absolute', bottom:-100, right:-100, width:500, height:500, borderRadius:'50%', background:'var(--pw-blush)', filter:'blur(80px)', opacity:0.20, pointerEvents:'none' }} />
+          <div style={{ maxWidth:1160, margin:'0 auto', position:'relative', zIndex:1 }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:10, marginBottom:24 }}>
+              <span style={{ display:'block', width:32, height:1, background:'rgba(255,255,255,0.20)' }} />
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'0.20em', textTransform:'uppercase', color:'rgba(255,255,255,0.40)' }}>Contact</span>
+            </div>
+            <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(40px,6vw,72px)', color:'white', fontWeight:700, letterSpacing:'-0.03em', lineHeight:0.95 }}>
+              Get in<br/>
+              <span style={{ background:'linear-gradient(135deg,#F5D8E8,#DDD5F5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>touch.</span>
+            </h1>
           </div>
         </section>
-        <section style={{ padding: '64px 24px 96px' }}>
-          <div style={{ maxWidth: 600, margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-              <div><label style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>First Name</label><input style={{ width: '100%', height: 44, border: '1px solid #E2E8F0', borderRadius: 8, padding: '0 14px', fontFamily: "'Inter', sans-serif", fontSize: 14, outline: 'none' }} /></div>
-              <div><label style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Last Name</label><input style={{ width: '100%', height: 44, border: '1px solid #E2E8F0', borderRadius: 8, padding: '0 14px', fontFamily: "'Inter', sans-serif", fontSize: 14, outline: 'none' }} /></div>
-            </div>
-            <div style={{ marginBottom: 16 }}><label style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Email</label><input type="email" style={{ width: '100%', height: 44, border: '1px solid #E2E8F0', borderRadius: 8, padding: '0 14px', fontFamily: "'Inter', sans-serif", fontSize: 14, outline: 'none' }} /></div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Subject</label>
-              <select style={{ width: '100%', height: 44, border: '1px solid #E2E8F0', borderRadius: 8, padding: '0 14px', fontFamily: "'Inter', sans-serif", fontSize: 14, outline: 'none', background: 'white' }}>
-                <option>General Question</option>
-                <option>Provider Partnership / Listing</option>
-                <option>Press / Media</option>
-                <option>Write a Review</option>
-              </select>
-            </div>
-            <div style={{ marginBottom: 24 }}><label style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Message</label><textarea rows={6} style={{ width: '100%', border: '1px solid #E2E8F0', borderRadius: 8, padding: '12px 14px', fontFamily: "'Inter', sans-serif", fontSize: 14, outline: 'none', resize: 'vertical' }} /></div>
-            <button className="btn-primary" style={{ fontSize: 15, padding: '14px 32px' }}>Send Message</button>
-            <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-              {[{ l: 'General inquiries', e: 'hello@peptidewinner.com' }, { l: 'Provider listings', e: 'providers@peptidewinner.com' }, { l: 'Press & media', e: 'press@peptidewinner.com' }, { l: 'Reviews', e: 'reviews@peptidewinner.com' }].map(c => (
-                <div key={c.l} style={{ background: '#F8FAFC', borderRadius: 12, padding: 20, border: '1px solid #E2E8F0' }}>
-                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: '#9CA3AF', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{c.l}</div>
-                  <a href={`mailto:${c.e}`} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#0EA5E9', textDecoration: 'none', fontWeight: 500 }}>{c.e}</a>
-                </div>
-              ))}
+        <section style={{ padding:'clamp(64px,7vw,96px) 32px' }}>
+          <div style={{ maxWidth:560, margin:'0 auto' }}>
+            <p style={{ fontFamily:'var(--font-body)', fontSize:16, fontWeight:300, color:'var(--pw-ink-60)', lineHeight:1.8, marginBottom:48 }}>
+              For provider listing inquiries, editorial corrections, affiliate partnerships, or general questions — reach us at the email below.
+            </p>
+            <div style={{ background:'var(--pw-surface)', borderRadius:20, padding:'36px', border:'1px solid rgba(20,24,38,0.07)' }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'var(--pw-ink-30)', textTransform:'uppercase', letterSpacing:'0.16em', marginBottom:8 }}>Email</div>
+              <a href="mailto:hello@peptidewinner.com" style={{ fontFamily:'var(--font-display)', fontSize:22, fontWeight:600, color:'var(--pw-midnight)', textDecoration:'none', letterSpacing:'-0.02em' }}>hello@peptidewinner.com</a>
             </div>
           </div>
         </section>

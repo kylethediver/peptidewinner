@@ -1,19 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Sora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --pw-sky:       #C8DEFA;
+  --pw-mint:      #C9EDDF;
+  --pw-blush:     #F5D8E8;
+  --pw-butter:    #F2F0C8;
+  --pw-lavender:  #DDD5F5;
+  --pw-midnight:  #0E1120;
+  --pw-navy:      #1C2340;
+  --pw-white:     #FAFBFF;
+  --pw-ink:       #141826;
+  --pw-ink-60:    rgba(20,24,38,0.60);
+  --pw-ink-30:    rgba(20,24,38,0.30);
+  --pw-surface:   #F5F6FA;
+  --pw-accent:    #3D5AFE;
+  --pw-accent-lt: #E8ECFF;
+  --font-display: 'Clash Display', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: #080C10; color: #F1F5F9; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  background: var(--pw-white);
+  color: var(--pw-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 a { color: inherit; }
 img { display: block; max-width: 100%; }
 input, button, textarea { font-family: inherit; }
 
-/* Hero 2-col grid */
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
 }
+
 @media (max-width: 768px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
@@ -21,7 +48,6 @@ input, button, textarea { font-family: inherit; }
   .nav-hamburger { display: block !important; }
 }
 
-/* Marquee */
 @keyframes pressScroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-25%); }
@@ -33,3 +59,8 @@ input, button, textarea { font-family: inherit; }
 .press-marquee { animation: pressScroll 36s linear infinite; }
 .press-marquee:hover { animation-play-state: paused; }
 .warning-marquee { animation: warnScroll 44s linear infinite; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

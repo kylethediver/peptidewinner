@@ -2,23 +2,37 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
+const LogoMark = () => (
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+    <circle cx="18" cy="18" r="5" fill="#0E1120"/>
+    <circle cx="18" cy="9" r="2.5" fill="#C8DEFA"/>
+    <circle cx="25.2" cy="13.5" r="2.5" fill="#C9EDDF"/>
+    <circle cx="25.2" cy="22.5" r="2.5" fill="#DDD5F5"/>
+    <circle cx="18" cy="27" r="2.5" fill="#F5D8E8"/>
+    <circle cx="10.8" cy="22.5" r="2.5" fill="#C8DEFA"/>
+    <circle cx="10.8" cy="13.5" r="2.5" fill="#F2F0C8"/>
+  </svg>
+)
+
 export default function Nav() {
   const [open, setOpen] = useState(false)
   return (
     <nav style={{
       position: 'sticky', top: 0, zIndex: 100,
-      background: 'rgba(10,10,10,0.95)',
-      backdropFilter: 'blur(16px)',
-      borderBottom: '1px solid rgba(255,255,255,0.08)',
+      background: 'rgba(250,251,255,0.92)',
+      backdropFilter: 'blur(20px)',
+      borderBottom: '1px solid rgba(20,24,38,0.07)',
     }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: 'white', letterSpacing: '-0.03em' }}>Peptide</span>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: '#10B981', letterSpacing: '-0.03em' }}>Winner</span>
+      <div style={{ maxWidth: 1160, margin: '0 auto', padding: '0 32px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <LogoMark />
+          <div style={{ lineHeight: 1 }}>
+            <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 600, color: '#0E1120', letterSpacing: '-0.03em' }}>Peptide</span>
+            <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 10, fontWeight: 400, color: 'var(--pw-ink-60)', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: 1 }}>Winner</span>
+          </div>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           {[
             { href: '/providers', label: 'Telehealth Providers' },
             { href: '/pharmacies', label: 'Compounding Pharmacies' },
@@ -27,34 +41,34 @@ export default function Nav() {
             { href: '/faq', label: 'FAQ' },
           ].map(l => (
             <Link key={l.href} href={l.href} style={{
-              fontFamily: "'Sora', sans-serif", fontSize: 13, fontWeight: 500,
-              color: 'rgba(255,255,255,0.65)', textDecoration: 'none',
-              padding: '6px 12px', borderRadius: 8,
-              letterSpacing: '-0.01em',
+              fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 400,
+              color: 'var(--pw-ink-60)', textDecoration: 'none',
+              padding: '6px 14px', borderRadius: 8,
+              transition: 'color 0.2s',
             }}>{l.label}</Link>
           ))}
         </div>
 
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <Link href="/start" style={{
-            background: '#10B981', color: 'white',
-            fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 13,
-            padding: '8px 18px', borderRadius: 100, textDecoration: 'none',
-            letterSpacing: '-0.01em',
+            background: 'var(--pw-midnight)', color: 'white',
+            fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: 14,
+            padding: '10px 22px', borderRadius: 100, textDecoration: 'none',
+            boxShadow: '0 4px 20px rgba(14,17,32,0.22)',
+            transition: 'transform 0.2s, box-shadow 0.2s',
           }}>Find providers →</Link>
           <button className="nav-hamburger" onClick={() => setOpen(!open)} style={{
-            display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 4,
+            display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 6,
           }}>
-            <div style={{ width: 22, height: 2, background: 'white', marginBottom: 5, borderRadius: 2 }} />
-            <div style={{ width: 22, height: 2, background: 'white', marginBottom: 5, borderRadius: 2 }} />
-            <div style={{ width: 22, height: 2, background: 'white', borderRadius: 2 }} />
+            <div style={{ width: 22, height: 2, background: '#0E1120', marginBottom: 5, borderRadius: 2 }} />
+            <div style={{ width: 22, height: 2, background: '#0E1120', marginBottom: 5, borderRadius: 2 }} />
+            <div style={{ width: 22, height: 2, background: '#0E1120', borderRadius: 2 }} />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <div style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 24px 20px' }}>
+        <div style={{ background: 'var(--pw-white)', borderTop: '1px solid rgba(20,24,38,0.07)', padding: '12px 32px 20px' }}>
           {[
             { href: '/providers', label: 'Telehealth Providers' },
             { href: '/pharmacies', label: 'Compounding Pharmacies' },
@@ -64,9 +78,9 @@ export default function Nav() {
             { href: '/start', label: 'Find Providers →' },
           ].map(l => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)} style={{
-              display: 'block', fontFamily: "'Sora', sans-serif", fontSize: 15,
-              color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '10px 0',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              display: 'block', fontFamily: 'var(--font-body)', fontSize: 15,
+              color: 'var(--pw-ink)', textDecoration: 'none', padding: '11px 0',
+              borderBottom: '1px solid rgba(20,24,38,0.06)',
             }}>{l.label}</Link>
           ))}
         </div>

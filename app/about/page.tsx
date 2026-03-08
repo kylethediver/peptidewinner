@@ -2,66 +2,43 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 
-export const metadata = { title: 'About PeptideWinner' }
-
 export default function AboutPage() {
   return (
     <>
       <Nav />
-      <main>
-        <section style={{ background: 'linear-gradient(160deg, #0F3460 0%, #1E4D8C 100%)', padding: '96px 24px', textAlign: 'center' }}>
-          <h1 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(36px, 5vw, 56px)', color: 'white', marginBottom: 16 }}>PeptideWinner</h1>
-          <p style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(20px, 3vw, 28px)', color: 'rgba(255,255,255,0.8)' }}>We built the resource we wished existed.</p>
-        </section>
-
-        <section style={{ background: 'white', padding: '80px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
-            <div>
-              <blockquote style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 22, color: '#0F172A', borderLeft: '4px solid #0EA5E9', paddingLeft: 24, fontStyle: 'italic', lineHeight: 1.5, marginBottom: 32 }}>
-                "I was paying $875 a month for a peptide protocol and had no idea if the pharmacy was even legitimate. So I built the tool I needed."
-              </blockquote>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: '#374151', lineHeight: 1.75, marginBottom: 20 }}>
-                We know it is difficult to compare pricing and providers directly. It is even harder to verify where your compounded peptides are coming from. Social media bombards you with ads, and transparent pricing is nearly impossible to find.
-              </p>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: '#374151', lineHeight: 1.75 }}>
-                PeptideWinner was built to fix that. We are a comparison resource for real people — we do not sell medications, we do not prescribe them. We help you navigate the ecosystem.
-              </p>
+      <main style={{ background:'var(--pw-white)', minHeight:'100vh' }}>
+        <section style={{ padding:'clamp(64px,7vw,96px) 32px', background:'var(--pw-midnight)', position:'relative', overflow:'hidden' }}>
+          <div style={{ position:'absolute', top:-100, right:-100, width:600, height:600, borderRadius:'50%', background:'var(--pw-sky)', filter:'blur(80px)', opacity:0.20, pointerEvents:'none' }} />
+          <div style={{ maxWidth:1160, margin:'0 auto', position:'relative', zIndex:1 }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:10, marginBottom:24 }}>
+              <span style={{ display:'block', width:32, height:1, background:'rgba(255,255,255,0.20)' }} />
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'0.20em', textTransform:'uppercase', color:'rgba(255,255,255,0.40)' }}>About</span>
             </div>
-            <div style={{ background: '#F8FAFC', borderRadius: 24, padding: 48, textAlign: 'center' }}>
-              <div style={{ width: 120, height: 120, borderRadius: '50%', background: 'linear-gradient(135deg, #0F3460, #0EA5E9)', margin: '0 auto 24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 42, color: 'white' }}>PW</span>
-              </div>
-              <h2 style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 22, color: '#0F172A', marginBottom: 8 }}>The PeptideWinner Team</h2>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#6B7280', lineHeight: 1.6 }}>Patients, researchers, and health journalists passionate about bringing transparency to the peptide therapy market.</p>
-            </div>
+            <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(40px,6vw,72px)', color:'white', fontWeight:700, letterSpacing:'-0.03em', lineHeight:0.95, marginBottom:24 }}>
+              Built for patients,<br/>
+              <span style={{ background:'linear-gradient(135deg,#C8DEFA,#DDD5F5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>not providers.</span>
+            </h1>
+            <p style={{ fontFamily:'var(--font-body)', fontSize:18, fontWeight:300, color:'rgba(255,255,255,0.50)', maxWidth:520, lineHeight:1.75 }}>
+              PeptideWinner exists to bring clarity to a confusing market. We research, compare, and verify so you don't have to.
+            </p>
           </div>
         </section>
-
-        <section style={{ background: '#F8FAFC', padding: '80px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 38, color: '#0F172A', textAlign: 'center', marginBottom: 48 }}>What we stand for.</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 32 }}>
-              {[
-                { icon: '🔬', title: 'Evidence First', body: 'Every claim we make is backed by peer-reviewed research. We link to sources and are transparent about the limits of current evidence.' },
-                { icon: '💰', title: 'Honest Economics', body: 'We earn affiliate commissions from providers. We disclose this on every page and never allow it to influence rankings or editorial coverage.' },
-                { icon: '🏥', title: 'Patient Safety', body: 'We only list providers who work with licensed physicians and FDA-registered pharmacies. No exceptions.' },
-                { icon: '📊', title: 'Real Reviews', body: 'Our reviews come from real patients. We moderate for authenticity and remove fake or paid submissions immediately.' },
-              ].map(v => (
-                <div key={v.title} style={{ background: 'white', borderRadius: 16, padding: 28, border: '1px solid #E2E8F0' }}>
-                  <div style={{ fontSize: 32, marginBottom: 12 }}>{v.icon}</div>
-                  <h3 style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 17, color: '#0F172A', marginBottom: 10 }}>{v.title}</h3>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#6B7280', lineHeight: 1.65 }}>{v.body}</p>
+        <section style={{ padding:'clamp(64px,7vw,96px) 32px' }}>
+          <div style={{ maxWidth:760, margin:'0 auto' }}>
+            {[
+              { label:'Our mission', text:'Peptide therapy is one of the most promising areas in regenerative medicine — but the market is flooded with unverified providers, questionable sourcing, and confusing pricing. PeptideWinner was built to cut through the noise and give patients a trustworthy resource for finding licensed, transparent care.' },
+              { label:'How we evaluate', text:"Every provider in our directory is evaluated on medical licensing, compounding pharmacy accreditation, clinical staff qualifications, pricing transparency, patient communication standards, and real patient reviews. We don't accept payment to change provider rankings." },
+              { label:'Affiliate disclosure', text:'PeptideWinner earns affiliate commissions when you click provider links and make a purchase. This helps fund our research. Our editorial rankings are never influenced by affiliate relationships — providers earn their position through merit.' },
+            ].map((s, i) => (
+              <div key={i} style={{ marginBottom:56 }}>
+                <div style={{ display:'inline-flex', alignItems:'center', gap:10, marginBottom:16 }}>
+                  <span style={{ display:'block', width:24, height:1, background:'var(--pw-ink-30)' }} />
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'0.20em', textTransform:'uppercase', color:'var(--pw-ink-60)' }}>{s.label}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section style={{ background: 'white', padding: '80px 24px', textAlign: 'center' }}>
-          <div style={{ maxWidth: 560, margin: '0 auto' }}>
-            <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 36, color: '#0F172A', marginBottom: 16 }}>Ready to find your provider?</h2>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: '#6B7280', marginBottom: 32 }}>Take our 2-minute quiz and get matched to verified peptide therapy providers.</p>
-            <Link href="/start" className="btn-primary" style={{ fontSize: 16, padding: '14px 32px' }}>Take the Matching Quiz →</Link>
+                <p style={{ fontFamily:'var(--font-body)', fontSize:16, fontWeight:300, color:'var(--pw-ink)', lineHeight:1.8 }}>{s.text}</p>
+              </div>
+            ))}
+            <Link href="/contact" style={{ display:'inline-block', background:'var(--pw-midnight)', color:'white', fontFamily:'var(--font-body)', fontWeight:500, fontSize:15, padding:'14px 32px', borderRadius:100, textDecoration:'none', boxShadow:'0 4px 20px rgba(14,17,32,0.22)' }}>Get in touch →</Link>
           </div>
         </section>
       </main>
