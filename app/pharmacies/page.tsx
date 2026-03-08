@@ -27,7 +27,7 @@ export default function PharmaciesPage() {
         <section style={{ padding:'clamp(48px,5vw,72px) 32px' }}>
           <div style={{ maxWidth:1160, margin:'0 auto' }}>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(320px, 1fr))', gap:16 }}>
-              {pharmacies.map((ph, i) => (
+              {pharmacies.map((ph: any, i) => (
                 <div key={i} style={{ background:'white', borderRadius:20, padding:'28px', border:'1px solid rgba(20,24,38,0.07)', boxShadow:'0 2px 12px rgba(14,17,32,0.05)' }}>
                   <div style={{ display:'flex', alignItems:'flex-start', gap:14, marginBottom:16 }}>
                     <div style={{ width:44, height:44, borderRadius:12, background:'var(--pw-mint)', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'var(--font-mono)', fontWeight:700, fontSize:14, color:'#1A5C3A', flexShrink:0 }}>{ph.logo}</div>
