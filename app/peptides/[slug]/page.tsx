@@ -25,7 +25,7 @@ export default async function PeptidePage({ params }: { params: Promise<{ slug: 
     return (
       <span style={{ fontSize: size, letterSpacing: '-1px' }}>
         {[1,2,3,4,5].map(s => (
-          <span key={s} style={{ color: s <= Math.floor(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
+          <span key={s} style={{ color: s <= Math.round(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
         ))}
       </span>
     )
@@ -59,20 +59,22 @@ export default async function PeptidePage({ params }: { params: Promise<{ slug: 
         {/* Content */}
         <section style={{ padding:'clamp(40px,5vw,64px) 24px' }}>
           <div style={{ maxWidth:900, margin:'0 auto' }}>
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:48, marginBottom:56 }}>
-              <div>
-                <h2 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:13, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>What is it?</h2>
-                <p style={{ fontFamily:"'Sora', sans-serif", fontSize:15, color:'rgba(255,255,255,0.65)', lineHeight:1.75 }}>{peptide.overview}</p>
+            {/* Overview + Mechanism — stacks on mobile */}
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:40, marginBottom:40 }}>
+              <div style={{ background:'rgba(255,255,255,0.03)', borderRadius:18, padding:'26px 24px', border:'1px solid rgba(255,255,255,0.07)' }}>
+                <h2 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:12, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:14 }}>What is it?</h2>
+                <p style={{ fontFamily:"'Sora', sans-serif", fontSize:15, color:'rgba(255,255,255,0.65)', lineHeight:1.8 }}>{peptide.overview}</p>
               </div>
-              <div>
-                <h2 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:13, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>How it works</h2>
-                <p style={{ fontFamily:"'Sora', sans-serif", fontSize:15, color:'rgba(255,255,255,0.65)', lineHeight:1.75 }}>{peptide.mechanism}</p>
+              <div style={{ background:'rgba(255,255,255,0.03)', borderRadius:18, padding:'26px 24px', border:'1px solid rgba(255,255,255,0.07)' }}>
+                <h2 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:12, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:14 }}>How it works</h2>
+                <p style={{ fontFamily:"'Sora', sans-serif", fontSize:15, color:'rgba(255,255,255,0.65)', lineHeight:1.8 }}>{peptide.mechanism}</p>
               </div>
             </div>
 
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:48, marginBottom:64 }}>
+            {/* Uses + Effects — stacks on mobile */}
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:24, marginBottom:64 }}>
               <div style={{ background:'rgba(255,255,255,0.03)', borderRadius:18, padding:'24px 22px', border:'1px solid rgba(255,255,255,0.07)' }}>
-                <h3 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:13, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:16 }}>Common uses</h3>
+                <h3 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:12, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:16 }}>Common uses</h3>
                 <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:10 }}>
                   {peptide.uses.map(u => (
                     <li key={u} style={{ fontFamily:"'Sora', sans-serif", fontSize:14, color:'rgba(255,255,255,0.65)', display:'flex', alignItems:'center', gap:10 }}>
@@ -83,8 +85,8 @@ export default async function PeptidePage({ params }: { params: Promise<{ slug: 
                 </ul>
               </div>
               <div style={{ background:'rgba(255,255,255,0.03)', borderRadius:18, padding:'24px 22px', border:'1px solid rgba(255,255,255,0.07)' }}>
-                <h3 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:13, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:16 }}>Expected effects</h3>
-                <p style={{ fontFamily:"'Sora', sans-serif", fontSize:14, color:'rgba(255,255,255,0.65)', lineHeight:1.75 }}>{peptide.effects}</p>
+                <h3 style={{ fontFamily:"'Sora', sans-serif", fontWeight:700, fontSize:12, color:peptide.color, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:16 }}>Expected effects</h3>
+                <p style={{ fontFamily:"'Sora', sans-serif", fontSize:14, color:'rgba(255,255,255,0.65)', lineHeight:1.8 }}>{peptide.effects}</p>
               </div>
             </div>
           </div>

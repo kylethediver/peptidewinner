@@ -7,7 +7,7 @@ function Stars({ rating, size = 13 }: { rating: number; size?: number }) {
   return (
     <span style={{ fontSize: size, letterSpacing: '-1px' }}>
       {[1,2,3,4,5].map(s => (
-        <span key={s} style={{ color: s <= Math.floor(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
+        <span key={s} style={{ color: s <= Math.round(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
       ))}
     </span>
   )

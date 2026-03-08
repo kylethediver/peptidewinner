@@ -7,7 +7,7 @@ function Stars({ rating, size = 14 }: { rating: number; size?: number }) {
   return (
     <span style={{ fontSize: size, letterSpacing: '-1px' }}>
       {[1,2,3,4,5].map(s => (
-        <span key={s} style={{ color: s <= Math.floor(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
+        <span key={s} style={{ color: s <= Math.round(rating) ? '#F59E0B' : 'rgba(255,255,255,0.15)' }}>★</span>
       ))}
     </span>
   )
@@ -386,17 +386,18 @@ export default function HomePage() {
             <p style={{ fontFamily:"'Sora', sans-serif", fontSize:16, color:'rgba(255,255,255,0.45)', lineHeight:1.7, marginBottom:40 }}>
               Weekly insights on providers, research, and patient stories. Join 4,200+ subscribers. No spam, ever.
             </p>
-            <div style={{ background:'rgba(255,255,255,0.04)', borderRadius:20, padding:8, border:'1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ borderRadius:16, overflow:'hidden', border:'1px solid rgba(255,255,255,0.1)' }}>
               <iframe
                 src="https://subscribe-forms.beehiiv.com/8dd8f415-3964-424e-978e-535148fb610c"
                 data-test-id="beehiiv-embed"
                 width="100%"
-                height="291"
+                height="320"
                 frameBorder={0}
                 scrolling="no"
-                style={{ borderRadius:14, border:'none', background:'transparent', maxWidth:'100%', margin:0 }}
+                style={{ display:'block', border:'none', maxWidth:'100%', margin:0, colorScheme:'dark' }}
               />
             </div>
+            <p style={{ fontFamily:"'Sora', sans-serif", fontSize:12, color:'rgba(255,255,255,0.2)', marginTop:16 }}>Free forever · Unsubscribe anytime</p>
             <p style={{ fontFamily:"'Sora', sans-serif", fontSize:12, color:'rgba(255,255,255,0.2)', marginTop:16 }}>4,200+ subscribers · Free forever · Unsubscribe anytime</p>
           </div>
         </section>

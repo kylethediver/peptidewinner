@@ -10,7 +10,7 @@ interface Provider {
 function Stars({ rating }: { rating: number }) {
   return (
     <span style={{ fontSize: 12, letterSpacing: '-1px' }}>
-      {[1,2,3,4,5].map(s => <span key={s} style={{ color: s <= Math.floor(rating) ? '#F59E0B' : '#D1D5DB' }}>★</span>)}
+      {[1,2,3,4,5].map(s => <span key={s} style={{ color: s <= Math.round(rating) ? '#F59E0B' : '#D1D5DB' }}>★</span>)}
     </span>
   )
 }
