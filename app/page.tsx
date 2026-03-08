@@ -389,7 +389,7 @@ export default function HomePage() {
             {/* Beehiiv embed — replace PUBLICATION_ID with your actual beehiiv publication ID from Settings > Integrations */}
             <div style={{ background:'rgba(255,255,255,0.04)', borderRadius:20, padding:8, border:'1px solid rgba(255,255,255,0.08)' }}>
               <iframe
-                src="https://embeds.beehiiv.com/REPLACE_WITH_YOUR_BEEHIIV_EMBED_ID"
+                src="https://embeds.beehiiv.com/<script async src="https://subscribe-forms.beehiiv.com/embed.js"></script><iframe src="https://subscribe-forms.beehiiv.com/8dd8f415-3964-424e-978e-535148fb610c" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 442px; height: 291px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>"
                 data-test-id="beehiiv-embed"
                 width="100%"
                 height="52"
