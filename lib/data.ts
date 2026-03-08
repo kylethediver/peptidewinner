@@ -107,7 +107,6 @@ export const peptides = [
     priceRange: '$149–$279/mo',
     peptideIds: ['cjc-1295'],
   },
-  {
     {
     slug: 'thymosin-alpha-1',
     name: 'Thymosin Alpha-1',
